@@ -1,36 +1,37 @@
 package fr.doranco.ecommerce.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
 @Table
+@Getter
+@Setter
 public class CartePaiement {
 
     @Id
-    @Column
+    @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String nomProprietaire;
 
-    @Column
+    @Column(nullable = false)
     private String prenomProprietaire;
 
-    @Column
+    @Column(nullable = false)
     private String numero;
 
-    @Column
+    @Column(nullable = false)
     private Date dateFinValidite;
 
-    @Column
+    @Column(nullable = false)
     private String cryptogramme;
 
-    @Column
+    @Column(nullable = false)
     private Utilisateur utilisateur;
 }

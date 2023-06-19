@@ -1,32 +1,33 @@
 package fr.doranco.ecommerce.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table
+@Getter
+@Setter
 public class Adresse {
 
     @Id
-    @Column
+    @GeneratedValue
     private Long id;
 
-    @Column
+    @Column()
     private String numero;
 
-    @Column
+    @Column(nullable = false)
     private String rue;
 
-    @Column
+    @Column(nullable = false)
     private String ville;
 
-    @Column
+    @Column(nullable = false)
     private String codePostal;
 
-    @Column
+    @Column(nullable = false)
     private Utilisateur utilisateur;
 
 }
