@@ -14,12 +14,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ECommerceApplication {
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) {
 		SpringApplication.run(ECommerceApplication.class, args);
 		
 		try (Connection con = DriverManager
-				  .getConnection("jdbc:mysql://localhost:8080", "root", "")) {
+				  .getConnection("jdbc:mysql://localhost:8081/", "root", "root")) {
 				    // use con here
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 	}
 
