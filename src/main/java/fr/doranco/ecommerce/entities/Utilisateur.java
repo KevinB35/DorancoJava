@@ -8,46 +8,50 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
 public class Utilisateur {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false)
     private String nom;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false)
     private String prenom;
 
     @Column(nullable = false)
     private Date dateNaissance;
 
-    @Column()
+    @Column(nullable = false)
     private Boolean isActif;
 
-    @Column()
+    @Column(nullable = false)
     private String profil;
 
-    @Column()
+    @Column(nullable = false)
     private String email;
 
-    @Column()
+    @Column(nullable = false)
     private String password;
 
     @Column()
     private String telephone;
 
-    @Column()
+    @Column(nullable = false)
     private List<Adresse> adresse;
 
     @Column()
     private List<Commande> commandes;
 
-    @Column()
+    @Column(nullable = false)
     private List<CartePaiement> carteDePaiemement;
 
     @Column()
