@@ -29,5 +29,4 @@ public class Adresse {
 
     @Column(nullable = false)
     private Utilisateur utilisateur;
-
 }
