@@ -1,5 +1,9 @@
 package fr.doranco.ecommerce;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,8 +14,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ECommerceApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		SpringApplication.run(ECommerceApplication.class, args);
+		
+		try (Connection con = DriverManager
+				  .getConnection("jdbc:mysql://localhost:8080", "root", "")) {
+				    // use con here
+				}
 	}
 
 }
