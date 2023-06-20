@@ -1,11 +1,15 @@
 package fr.doranco.ecommerce.entities;
 
+import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Entity
 @Table
@@ -13,22 +17,22 @@ import java.util.List;
 @Setter
 public class Categorie {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    @Column(nullable = false)
-    private String nom;
+	@Column(nullable = false)
+	private String nom;
 
-    @Column
-    private Float remise;
+	@Column
+	private Float remise;
 
-    @Column(nullable = false)
-    private Boolean isRemiseCumulable;
+	@Column(nullable = false)
+	private Boolean isRemiseCumulable;
 
-    @Column
-    private String photo;
+	@Column
+	private String photo;
 
-    @Column
-    private List<Article> articles;
+	@OneToMany
+	private List<Article> articles;
 }

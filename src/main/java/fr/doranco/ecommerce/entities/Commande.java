@@ -1,12 +1,18 @@
 package fr.doranco.ecommerce.entities;
 
-
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Date;
 import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table
@@ -14,40 +20,40 @@ import java.util.List;
 @Setter
 public class Commande {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    @Column
-    private Integer numero;
+	@Column
+	private Integer numero;
 
-    @Column
-    private Date dateCreation;
+	@Column
+	private Date dateCreation;
 
-    @Column
-    private Date dateLivraison;
+	@Column
+	private Date dateLivraison;
 
-    @Column
-    private Float totalRemise;
+	@Column
+	private Float totalRemise;
 
-    @Column
-    private Float fraisExpedition;
+	@Column
+	private Float fraisExpedition;
 
-    @Column
-    private Float totalGeneral;
+	@Column
+	private Float totalGeneral;
 
-    @Column
-    private Adresse adresseFacturation;
+	@OneToOne
+	private Adresse adresseFacturation;
 
-    @Column
-    private Adresse adresseLivraison;
+	@OneToOne
+	private Adresse adresseLivraison;
 
-    @Column
-    private CartePaiement cartePaiement;
+	@OneToOne
+	private CartePaiement cartePaiement;
 
-    @Column
-    private Utilisateur utilisateur;
+	@ManyToOne
+	private Utilisateur utilisateur;
 
-    @Column
-    private List<LigneCommande> lignesCommande;
+	@OneToMany
+	private List<LigneCommande> lignesCommande;
 }
