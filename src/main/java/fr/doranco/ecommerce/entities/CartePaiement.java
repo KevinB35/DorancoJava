@@ -1,11 +1,15 @@
 package fr.doranco.ecommerce.entities;
 
+import java.util.Date;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Date;
 
 @Entity
 @Table
@@ -13,25 +17,25 @@ import java.util.Date;
 @Setter
 public class CartePaiement {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    @Column(nullable = false)
-    private String nomProprietaire;
+	@Column(nullable = false)
+	private String nomProprietaire;
 
-    @Column(nullable = false)
-    private String prenomProprietaire;
+	@Column(nullable = false)
+	private String prenomProprietaire;
 
-    @Column(nullable = false)
-    private String numero;
+	@Column(nullable = false)
+	private String numero;
 
-    @Column(nullable = false)
-    private Date dateFinValidite;
+	@Column(nullable = false)
+	private Date dateFinValidite;
 
-    @Column(nullable = false)
-    private String cryptogramme;
+	@Column(nullable = false)
+	private String cryptogramme;
 
-    @Column(nullable = false)
-    private Utilisateur utilisateur;
+	@ManyToOne
+	private Utilisateur utilisateur;
 }
