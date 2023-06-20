@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class IndexController {
-    @RequestMapping("test")
+    @RequestMapping("/test")
     public String index(Model model) {
         model.addAttribute("test", "test");
         return "index";
