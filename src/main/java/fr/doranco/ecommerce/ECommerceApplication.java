@@ -17,7 +17,7 @@ public class ECommerceApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) throws SQLException {
 		SpringApplication.run(ECommerceApplication.class, args);
 
-		try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3036/ecommerce", "root", "root")) {
+		try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce", "root", "root")) {
 			// use con here
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
