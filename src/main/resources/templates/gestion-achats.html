@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="layouts/default"
+      th:with="user=${user}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestion Achats</title>
+</head>
+<body>
+
+<div class="container" layout:fragment="content">
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Prix</th>
+            <th>Categorie</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="article : ${articles}">
+            <td><img th:src="@{(${article.photo})}"/></td>
+            <td th:text="${article.nom}"></td>
+            <td th:text="${article.description}"></td>
+            <td th:text="${article.prix}"></td>
+            <td th:text="${article.categorie}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

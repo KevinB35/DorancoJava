@@ -7,24 +7,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import fr.doranco.ecommerce.dto.articleDto;
 import fr.doranco.ecommerce.entities.Article;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/test")
 public class IndexController {
 
     @RequestMapping("")
-    public String index(@RequestParam(name = "name", required = false, defaultValue = "test") String name,
+    public String index(Principal principal,
+                        @RequestParam(name = "name", required = false, defaultValue = "test") String name,
                         Model model) {
-        model.addAttribute("name", name);
+        try {
+            model.addAttribute("user", principal.getName());
+        } catch (NullPointerException e) {
+            model.addAttribute("user", "");
+        }
         model.addAttribute("user", "test user");
         return "index";
     }
     
     @GetMapping(value = "/article/{articleId}")
-    public articleDto getArticleById(@PathVariable Long id) {
-        articleDto articleDto = new Article();
+    public Article getArticleById(@PathVariable Long id) {
+        Article articleDto = new Article();
 
         return articleDto;
     }
