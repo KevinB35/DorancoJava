@@ -47,4 +47,19 @@ public class Article {
 
 	@OneToMany
 	private List<Commentaire> commentaires;
+
+	public Article(Long id, String nom, String description, Float prix, Float remise, Integer stock, Boolean isVendable,
+			String photo, String video, List<Commentaire> commentaires) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.description = description;
+		this.prix = prix;
+		this.remise = remise;
+		this.stock = stock;
+		this.isVendable = isVendable;
+		this.photo = photo;
+		this.video = video;
+		this.commentaires = commentaires;
+	}
 }

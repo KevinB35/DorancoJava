@@ -1,20 +1,24 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" layout:decorate="layouts/default"
+      th:with="user=${user}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<div>
-<form>
-<label>Accéder à ma session :</label>
-
-<input type=email formmethod=post pattern=[a-zA-Z0-9._%+-]+@[a-zA-Z]+\.[a-z]{2,4}>
-<label>email :</label>
-
-<input type=password formmethod=post pattern=[a-zA-Z0-9!@#&()–[{}]:;,?/*\~$^+=]{8,20} >
-<label>Mot de passe :</label>
-
-<input type=button formmethod=post placeholder="Se connecter">
-
-</form>
-</div>
+	<div layout:fragment="content">
+		<form>
+		<label>Accéder à ma session :</label>
+		
+		<input type=email formmethod=post pattern=[a-zA-Z0-9._%+-]+@[a-zA-Z]+\.[a-z]{2,4}>
+		<label>email :</label>
+		
+		<input type=password formmethod=post pattern=[a-zA-Z0-9!@#&()–[{}]:;,?/*\~$^+=]{8,20} >
+		<label>Mot de passe :</label>
+		
+		<input type=submit formmethod=post placeholder="Se connecter">
+		
+		</form>
+	</div>
 
 </body>
 
