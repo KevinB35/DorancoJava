@@ -1,21 +1,20 @@
 package fr.doranco.ecommerce.controller;
 
 import fr.doranco.ecommerce.entities.Article;
-import fr.doranco.ecommerce.entities.Categorie;
-import fr.doranco.ecommerce.entities.Commentaire;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class GestionAchatController {
 
     @RequestMapping("/gestion-achats")
-    public String gestionAchats(@RequestParam(name = "category", required = false, defaultValue = "") String category,
+    public String gestionAchats(Principal principal,
+                                @RequestParam(name = "category", required = false, defaultValue = "") String category,
                                 Model model) {
 
         List<Article> articles = List.of(
@@ -45,6 +44,12 @@ public class GestionAchatController {
         );
 
         model.addAttribute("articles", articles);
+
+        try {
+            model.addAttribute("user", principal.getName());
+        } catch (NullPointerException e) {
+            model.addAttribute("user", "");
+        }
         return "gestion-achats";
     }
 }

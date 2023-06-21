@@ -8,19 +8,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/test")
-public class IndexController {
+public class AccueilController {
 
-    @RequestMapping("")
-    public String index(Principal principal,
-                        @RequestParam(name = "name", required = false, defaultValue = "test") String name,
-                        Model model) {
+    @RequestMapping("/")
+    public String index(Principal principal, Model model) {
         try {
             model.addAttribute("user", principal.getName());
         } catch (NullPointerException e) {
             model.addAttribute("user", "");
         }
-        model.addAttribute("user", "test user");
-        return "index";
+        return "accueil";
     }
 }

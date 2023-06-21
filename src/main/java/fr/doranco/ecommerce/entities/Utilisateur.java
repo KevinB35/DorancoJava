@@ -18,46 +18,48 @@ import lombok.Setter;
 @Setter
 public class Utilisateur {
 
-	@Id
-	@GeneratedValue
-	private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	@Column(nullable = false)
-	private String nom;
+    @Column(nullable = false)
+    private String nom;
 
-	@Column(nullable = false)
-	private String prenom;
+    @Column(nullable = false)
+    private String prenom;
 
-	@Column(nullable = false)
-	private Date dateNaissance;
+    @Column(nullable = false)
+    private Date dateNaissance;
 
-	@Column(nullable = false)
-	private Boolean isActif;
+    //isActif
+    @Column(nullable = false)
+    private Boolean enabled;
 
-	@Column(nullable = false)
-	private String profil;
+    @Column(nullable = false)
+    private String profil;
 
-	@Column(nullable = false)
-	private String email;
+    //email
+    @Column(nullable = false)
+    private String username;
 
-	@Column(nullable = false)
-	private String password;
+    @Column(nullable = false)
+    private String password;
 
-	@Column()
-	private String telephone;
+    @Column()
+    private String telephone;
 
-	@OneToMany
-	private List<Adresse> adresse;
+    @OneToMany
+    private List<Adresse> adresse;
 
-	@OneToMany
-	private List<Commande> commandes;
+    @OneToMany
+    private List<Commande> commandes;
 
-	@OneToMany
-	private List<CartePaiement> carteDePaiemement;
+    @OneToMany
+    private List<CartePaiement> carteDePaiemement;
 
-	@OneToMany
-	private List<Commentaire> commentaires;
+    @OneToMany
+    private List<Commentaire> commentaires;
 
-	@OneToMany
-	private List<ArticlePanier> panier;
+    @OneToMany
+    private List<ArticlePanier> panier;
 }
