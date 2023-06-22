@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr" layout:decorate="layouts/default"
+      th:with="user=${user}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ajouter un article</title>
+</head>
+<body>
+
+<div class="container" layout:fragment="content">
+    
+        <div class="add/article-body">
+            <form
+                    class="form-horizontal"
+                    method="post"
+                    role="form"
+                    th:action="@{/article/ajouter}"
+            >
+            
+             	<div class="form-group mb-3">
+                    <label class="control-label">Nom</label>
+                    <input
+                            class="form-control"
+                            id="nom"
+                            name="nom"
+                            placeholder="Nom"
+                            type="text"
+                    />
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label class="control-label">Description</label>
+                    <input
+                            class="form-control"
+                            id="description"
+                            name="description"
+                            placeholder="description"
+                            type="text"
+                    />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="control-label">Prix</label>
+                    <input
+                            class="form-control"
+                            id="Prix"
+                            name="Prix"
+                            placeholder="Prix"
+                            type="Number"
+                    />
+                </div>
+
+               
+
+                <div class="form-group mb-3">
+                    <label class="control-label">Remise</label>
+                    <input
+                            class="form-control"
+                            id="remise"
+                            name="remise"
+                            placeholder="Remise"
+                            type="Number"
+                    />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="control-label">Stock</label>
+                    <input
+                            class="form-control"
+                            id="stock"
+                            name="stock"
+                            type="Number"
+                    />
+                </div>
+
+                <div class="form-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="categorie">Categorie</label>
+                    </div>
+                    <select class="custom-select" id="categorie" name="categorie">
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+                </div>
+
+                <input name="isVendable" type="checkbox" value="true"/>
+                
+                <div class="form-group mb-3">
+                    <label class="control-label">Photo</label>
+                    <input
+                            class="form-control"
+                            id="photo"
+                            name="photo"
+                            placeholder="Photo"
+                            type="url"
+                    />
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label class="control-label">Video</label>
+                    <input
+                            class="form-control"
+                            id="video"
+                            name="video"
+                            placeholder="Video"
+                            type="url"
+                    />
+                </div>
+                
+                <div class="form-group mb-3">
+                    <button class="btn btn-primary" type="submit">Ajouter l'article</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
