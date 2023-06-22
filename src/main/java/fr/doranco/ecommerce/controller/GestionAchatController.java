@@ -28,12 +28,10 @@ public class GestionAchatController {
 
     @RequestMapping("/gestion-achats")
     public String gestionAchats(Authentication auth,
-                                @RequestParam(name = "id", required = false, defaultValue = "1") Long id,
                                 Model model) {
 
-        Optional<Article> findArticle = articleRepository.findById(id);
-        Article article = findArticle.get();
-        model.addAttribute("articles", List.of(article));
+        List<Article> articles = articleRepository.findAll();
+        model.addAttribute("articles", articles);
 
         try {
             model.addAttribute("user", (User) auth.getPrincipal());
