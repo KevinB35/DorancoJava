@@ -72,4 +72,8 @@ public class ArticleController {
         return "article";
     }
     
+    public void saveAndFlush(Article article) {
+    	saveAndFlush(article);
+    }
+    
 }
