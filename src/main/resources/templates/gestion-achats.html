@@ -8,13 +8,18 @@
 </head>
 <body>
 
-<div class="container" layout:fragment="content">
+<div class="container text-center" layout:fragment="content">
+    <div th:if="${role == 'ROLE_ADMIN' || role == 'ROLE_MAGASINIER'}">
+        <button class="btn btn-primary mt-5 mb-2"
+                type="button">
+            Ajouter un article
+        </button>
+    </div>
 
-	<div><input type=button formmethod=get placeholder="Ajouter"></div>
-	
     <table class="table">
         <thead>
         <tr>
+            <th></th>
             <th></th>
             <th>Nom</th>
             <th>Description</th>
@@ -24,15 +29,19 @@
         </thead>
         <tbody>
         <tr th:each="article : ${articles}">
-            <td><img th:src="@{(${article.photo})}"/></td>
+            <td style="width:50px"><input aria-label="Delete" type="checkbox"></td>
+            <td style="width:50px"><img style="width:50px" th:src="@{(${article.photo})}"/></td>
             <td th:text="${article.nom}"></td>
             <td th:text="${article.description}"></td>
             <td th:text="${article.prix}"></td>
             <td th:text="${article.categorie}"></td>
-            <td><input type=button formmethod=delete placeholder="X"></td>
         </tr>
         </tbody>
     </table>
+    <button class="btn btn-primary"
+            th:if="${role == 'ROLE_ADMIN' || role == 'ROLE_MAGASINIER'}">
+        Supprimer les articles selectionnes
+    </button>
 </div>
 
 </body>
