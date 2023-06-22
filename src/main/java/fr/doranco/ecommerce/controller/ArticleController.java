@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,14 +26,14 @@ public class ArticleController {
     @Autowired
     private ArticleRepository articleRepository;
 
-    @RequestMapping("/Article")
-    public String article(Authentication auth,
-                          @RequestParam(name = "id", required = false, defaultValue = "") Long id,
+    @RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
+    public String article(@PathVariable("id") Long id,
+                          Authentication auth,
                           Model model) {
 
         Optional<Article> findArticle = articleRepository.findById(id);
         Article article = findArticle.get();
-        model.addAttribute("articles", article);
+        model.addAttribute("article", article);
 
         try {
             model.addAttribute("user", (User) auth.getPrincipal());
@@ -42,8 +43,8 @@ public class ArticleController {
         }
         return "article";
     }
-    
-    @RequestMapping(value = "/Article?id=${article.id}", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/article", method = RequestMethod.POST)
     public String post(@RequestParam(name = "nom") String nom,
                        @RequestParam(name = "description") String description,
                        @RequestParam(name = "prix") Float prix,
@@ -55,21 +56,25 @@ public class ArticleController {
                        @RequestParam(name = "commentaire") List<Commentaire> commentaires,
                        @RequestParam(name = "categorie") Categorie categorie,
                        Model model) {
-    	Article article = new Article();
-    	article.setNom(nom);
-    	article.setDescription(description);
-    	article.setPrix(prix);
-    	article.setRemise(remise);
-    	article.setStock(stock);
-    	article.setIsVendable(isVendable);
-    	article.setPhoto(photo);
-    	article.setVideo(video);
-    	article.setCommentaires(commentaires);
-    	article.setCategorie(categorie);
+        Article article = new Article();
+        article.setNom(nom);
+        article.setDescription(description);
+        article.setPrix(prix);
+        article.setRemise(remise);
+        article.setStock(stock);
+        article.setIsVendable(isVendable);
+        article.setPhoto(photo);
+        article.setVideo(video);
+        article.setCommentaires(commentaires);
+        article.setCategorie(categorie);
 
         saveAndFlush(article);
 
         return "article";
     }
-    
+
+    public void saveAndFlush(Article article) {
+        articleRepository.saveAndFlush(article);
+    }
+
 }

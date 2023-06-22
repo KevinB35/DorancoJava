@@ -5,39 +5,39 @@
       xmlns:th="http://www.thymeleaf.org">
 <body>
 
-	<div layout:fragment="content">
-	
-		<div id=photos/videos-article>
-			<img th:src="${article.photo}" alt="photo-article">
-			<iframe th:src="${article.video}" title="video-article"></iframe>
-		</div>
-		
-		<div>
-			<h5 id=nom-article th:text="${article.nom}"></h5>
-			<p id=description-article th:text="${article.description}"></p>
-		</div>
-		
-		<div>
-			<p id=prix-article th:text="${article.prix}"></p>
-			<p id=remise-article th:text="${article.remise}"></p>
-		</div>
-		
-		<input type=button formmethod=post placeholder="Ajouter au panier">
-		
-		<div>
-			<p id=stock-article th:text="${article.stock}"></p>
-			<p id=isVendable-article th:text="${article.is_vendable}"></p>
-		</div>
-		
-		<div>
-			<div>
-				<p id=commentaire-article th:text="${commentaire.utilisateur}"></p>
-				<p id=commentaire-article th:text="${commentaire.note}"></p>			
-			</div>
-			<p id=commentaire-article th:text="${commentaire.texte}"></p>
-		</div>
-		
-	</div>
+<div layout:fragment="content">
+
+    <div id=photos/videos-article>
+        <img alt="photo-article" th:src="${article.photo}"/>
+        <video th:src="${article.video}" title="video-article"/>
+    </div>
+
+    <div>
+        <h5 id=nom-article th:text="${article.nom}"></h5>
+        <p id=description-article th:text="${article.description}"></p>
+    </div>
+
+    <div>
+        <p id=prix-article th:text="${article.prix}"></p>
+        <p id=remise-article th:text="${article.remise}"></p>
+    </div>
+
+    <input formmethod=post placeholder="Ajouter au panier" type=button>
+
+    <div>
+        <p id=stock-article th:text="${article.stock}"></p>
+        <p id=isVendable-article th:text="${article.isVendable}"></p>
+    </div>
+
+    <div>
+        <div>
+            <p id=commentaire-article th:text="${commentaire?.utilisateur}"></p>
+            <p id=commentaire-article th:text="${commentaire?.note}"></p>
+        </div>
+        <p id=commentaire-article th:text="${commentaire?.texte}"></p>
+    </div>
+
+</div>
 
 </body>
 
