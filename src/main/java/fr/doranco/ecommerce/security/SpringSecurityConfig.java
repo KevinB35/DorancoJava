@@ -1,9 +1,10 @@
 package fr.doranco.ecommerce.security;
 
-import fr.doranco.ecommerce.repository.UtilisateurRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,8 +18,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.sql.DataSource;
 
 @Configuration
+@EnableWebSecurity
 public class SpringSecurityConfig {
-    private UtilisateurRepository utilisateurRepository;
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -29,17 +30,13 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) ->
                 authorize
-                        .requestMatchers("/").permitAll()
-                        .requestMatchers("/login-utilisateur").permitAll()
-                        .requestMatchers("/gestion-achats").permitAll()
-                        .requestMatchers("/gestion-achats?id=2").permitAll()
+                        .requestMatchers("/", "/login-utilisateur", "/add-utilisateur").permitAll()
                         .anyRequest().authenticated()
-        ).formLogin(
-                form -> form
-                        .loginPage("/login-utilisateur")
-                        .loginProcessingUrl("/login-utilisateur")
-                        .defaultSuccessUrl("/")
-                        .permitAll()
+        ).formLogin(form -> form
+                .loginPage("/login-utilisateur")
+                .loginProcessingUrl("/login-utilisateur")
+                .defaultSuccessUrl("/")
+                .permitAll()
         ).logout(
                 logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -49,7 +46,45 @@ public class SpringSecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
+    public InMemoryUserDetailsManager userDetailsService() {
+        UserDetails admin = User.withUsername("Admin")
+                .password(passwordEncoder().encode("12345"))
+                .roles("ADMIN", "MAGASINIER", "CLIENT")
+                .build();
+        UserDetails magasinier = User.withUsername("Magasinier")
+                .password(passwordEncoder().encode("12345"))
+                .roles("MAGASINIER", "CLIENT")
+                .build();
+        UserDetails client = User.withUsername("Client")
+                .password(passwordEncoder().encode("12345"))
+                .roles("CLIENT")
+                .build();
+        return new InMemoryUserDetailsManager(admin, magasinier, client);
     }
+
+    /*
+    @Bean
+    public UserDetailsService userDetailsService(DataSource dataSource) {
+
+        User.UserBuilder users = User.withDefaultPasswordEncoder();
+        UserDetails admin = User.builder()
+                .username("Admin")
+                .password("12345")
+                .roles("MAGASINIER", "ADMIN", "CLIENT")
+                .build();
+        UserDetails magasinier = User.builder()
+                .username("Magasinier")
+                .password("12345")
+                .roles("MAGASINIER", "CLIENT")
+                .build();
+        UserDetails client = User.builder()
+                .username("Client")
+                .password("12345")
+                .roles("CLIENT")
+                .build();
+        return new InMemoryUserDetailsManager(admin, magasinier, client);
+
+        //return new JdbcUserDetailsManager(dataSource);
+    }
+    */
 }

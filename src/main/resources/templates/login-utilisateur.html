@@ -15,6 +15,9 @@
     <div th:if="${param.logout}">
         <div class="alert alert-success"> Deconnecte</div>
     </div>
+    <div th:if="${signin}">
+        <div class="alert alert-success">Compte créé</div>
+    </div>
 
     <div class="card">
         <div class="card-header">
