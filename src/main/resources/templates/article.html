@@ -8,8 +8,8 @@
 	<div layout:fragment="content">
 	
 		<div id=photos/videos-article>
-			<img th:src="${article.photo}" alt="photo-article">
-			<iframe th:src="${article.video}" title="video-article"></iframe>
+			<img th:src="@{(${article.photo})}" alt="photo-article">
+			<video><source th:src="@{(${article.video})}" type="video/mp4"/></video>
 		</div>
 		
 		<div>
@@ -26,15 +26,15 @@
 		
 		<div>
 			<p id=stock-article th:text="${article.stock}"></p>
-			<p id=isVendable-article th:text="${article.is_vendable}"></p>
+			<p id=isVendable-article th:text="${article.isVendable}"></p>
 		</div>
 		
 		<div>
 			<div>
-				<p id=commentaire-article th:text="${commentaire.utilisateur}"></p>
-				<p id=commentaire-article th:text="${commentaire.note}"></p>			
+				<p id=commentaire-article th:text="${commentaire?.utilisateur}"></p>
+				<p id=commentaire-article th:text="${commentaire?.note}"></p>			
 			</div>
-			<p id=commentaire-article th:text="${commentaire.texte}"></p>
+			<p id=commentaire-article th:text="${commentaire?.texte}"></p>
 		</div>
 		
 	</div>

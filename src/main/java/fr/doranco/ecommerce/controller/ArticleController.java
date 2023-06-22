@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,9 +26,9 @@ public class ArticleController {
     @Autowired
     private ArticleRepository articleRepository;
 
-    @RequestMapping("/Article")
-    public String article(Authentication auth,
-                          @RequestParam(name = "id", required = false, defaultValue = "") Long id,
+    @RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
+    
+    public String article(Authentication auth, @PathVariable("id") Long id,
                           Model model) {
 
         Optional<Article> findArticle = articleRepository.findById(id);
@@ -43,8 +44,9 @@ public class ArticleController {
         return "article";
     }
     
-    @RequestMapping(value = "/Article?id=${article.id}", method = RequestMethod.POST)
-    public String post(@RequestParam(name = "nom") String nom,
+    @RequestMapping(value = "/article", method = RequestMethod.POST)
+    public String post(
+    				   @RequestParam(name = "nom") String nom,
                        @RequestParam(name = "description") String description,
                        @RequestParam(name = "prix") Float prix,
                        @RequestParam(name = "remise") Float remise,
