@@ -39,7 +39,7 @@ public class SpringSecurityConfig {
                 .permitAll()
         ).logout(
                 logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/deconnexion"))
                         .permitAll()
         );
         return http.build();
@@ -47,15 +47,15 @@ public class SpringSecurityConfig {
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails admin = User.withUsername("Admin")
+        UserDetails admin = User.withUsername("Admin@admin.com")
                 .password(passwordEncoder().encode("12345"))
-                .roles("ADMIN", "MAGASINIER", "CLIENT")
+                .roles("ADMIN")
                 .build();
-        UserDetails magasinier = User.withUsername("Magasinier")
+        UserDetails magasinier = User.withUsername("Magasinier@admin.com")
                 .password(passwordEncoder().encode("12345"))
-                .roles("MAGASINIER", "CLIENT")
+                .roles("MAGASINIER")
                 .build();
-        UserDetails client = User.withUsername("Client")
+        UserDetails client = User.withUsername("Client@admin.com")
                 .password(passwordEncoder().encode("12345"))
                 .roles("CLIENT")
                 .build();

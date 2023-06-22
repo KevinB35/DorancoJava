@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,23 +21,24 @@ import fr.doranco.ecommerce.repository.ArticleRepository;
 
 @Controller
 public class ArticleController {
-	
-	@Autowired
-	private ArticleRepository articleRepository;
 
-    @RequestMapping(value = "/Article", method = RequestMethod.GET)
-    public String article(Principal principal,
-                                @RequestParam(name = "id", required = false, defaultValue = "") Long id,
-                                Model model) {
+    @Autowired
+    private ArticleRepository articleRepository;
 
-    	Optional<Article> findArticle = articleRepository.findById(id);
-    	Article article = findArticle.get();
+    @RequestMapping("/Article")
+    public String article(Authentication auth,
+                          @RequestParam(name = "id", required = false, defaultValue = "") Long id,
+                          Model model) {
+
+        Optional<Article> findArticle = articleRepository.findById(id);
+        Article article = findArticle.get();
         model.addAttribute("articles", article);
 
         try {
-            model.addAttribute("user", principal.getName());
+            model.addAttribute("user", (User) auth.getPrincipal());
+            model.addAttribute("role", ((User) auth.getPrincipal()).getAuthorities().iterator().next());
         } catch (NullPointerException e) {
-            model.addAttribute("user", "");
+            model.addAttribute("user", null);
         }
         return "article";
     }

@@ -1,5 +1,7 @@
 package fr.doranco.ecommerce.controller;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +13,11 @@ import java.security.Principal;
 public class AccueilController {
 
     @RequestMapping("/")
-    public String index(Principal principal, Model model) {
+    public String index(Authentication auth, Model model) {
         try {
-            model.addAttribute("user", principal.getName());
+            model.addAttribute("user", (User) auth.getPrincipal());
         } catch (NullPointerException e) {
-            model.addAttribute("user", "");
+            model.addAttribute("user", null);
         }
         return "accueil";
     }
