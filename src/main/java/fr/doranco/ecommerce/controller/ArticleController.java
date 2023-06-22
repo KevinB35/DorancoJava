@@ -53,7 +53,6 @@ public class ArticleController {
                        @RequestParam(name = "isVendable") Boolean isVendable,
                        @RequestParam(name = "photo") String photo,
                        @RequestParam(name = "video") String video,
-                       @RequestParam(name = "commentaire") List<Commentaire> commentaires,
                        @RequestParam(name = "categorie") Categorie categorie,
                        Model model) {
         Article article = new Article();
@@ -65,7 +64,6 @@ public class ArticleController {
         article.setIsVendable(isVendable);
         article.setPhoto(photo);
         article.setVideo(video);
-        article.setCommentaires(commentaires);
         article.setCategorie(categorie);
 
         saveAndFlush(article);
