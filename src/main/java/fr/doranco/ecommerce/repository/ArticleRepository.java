@@ -9,6 +9,6 @@ import fr.doranco.ecommerce.entities.Article;
 public interface ArticleRepository extends JpaRepository<Article, Long>{
 	Optional<Article> findById(Long id);
 	
-	Article saveAndFlush(Article artcile);
+	Article saveAndFlush(Article article);
 
 }
