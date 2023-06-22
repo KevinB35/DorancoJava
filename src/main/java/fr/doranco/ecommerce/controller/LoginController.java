@@ -18,5 +18,15 @@ public class LoginController {
         }
         return "login-utilisateur";
     }
+    
+    @RequestMapping("/create-utilisateur")
+    public String index(Principal principal, Model model) {
+        try {
+            model.addAttribute("user", principal.getName());
+        } catch (NullPointerException e) {
+            model.addAttribute("user", "");
+        }
+        return "add-utilisateur";
+    }
 
 }

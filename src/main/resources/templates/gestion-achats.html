@@ -9,6 +9,9 @@
 <body>
 
 <div class="container" layout:fragment="content">
+
+	<div><input type=button formmethod=get placeholder="Ajouter"></div>
+	
     <table class="table">
         <thead>
         <tr>
@@ -26,6 +29,7 @@
             <td th:text="${article.description}"></td>
             <td th:text="${article.prix}"></td>
             <td th:text="${article.categorie}"></td>
+            <td><input type=button formmethod=delete placeholder="X"></td>
         </tr>
         </tbody>
     </table>
