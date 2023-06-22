@@ -64,7 +64,7 @@ public class ArticleController {
     	article.setIsVendable(isVendable);
     	article.setPhoto(photo);
     	article.setVideo(video);
-    	article.setCommentaire(commentaires);
+    	article.setCommentaires(commentaires);
     	article.setCategorie(categorie);
 
         saveAndFlush(article);
