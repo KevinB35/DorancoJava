@@ -19,12 +19,16 @@ import fr.doranco.ecommerce.entities.Article;
 import fr.doranco.ecommerce.entities.Categorie;
 import fr.doranco.ecommerce.entities.Commentaire;
 import fr.doranco.ecommerce.repository.ArticleRepository;
+import fr.doranco.ecommerce.repository.CategorieRepository;
 
 @Controller
 public class ArticleController {
 
     @Autowired
     private ArticleRepository articleRepository;
+    
+    @Autowired
+    private CategorieRepository categorieRepository;
 
     @RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
     public String article(@PathVariable("id") Long id,
@@ -43,8 +47,21 @@ public class ArticleController {
         }
         return "article";
     }
+    
+    @RequestMapping(value = "/article/ajouter", method = RequestMethod.GET)
+    public String article(
+                          Authentication auth,
+                          Model model) {
 
-    @RequestMapping(value = "/article", method = RequestMethod.POST)
+        try {
+            model.addAttribute("user", (User) auth.getPrincipal());
+        } catch (NullPointerException e) {
+            model.addAttribute("user", null);
+        }
+        return "add-articles";
+    }
+
+    @RequestMapping(value = "/article/ajouter", method = RequestMethod.POST)
     public String post(@RequestParam(name = "nom") String nom,
                        @RequestParam(name = "description") String description,
                        @RequestParam(name = "prix") Float prix,
@@ -53,8 +70,13 @@ public class ArticleController {
                        @RequestParam(name = "isVendable") Boolean isVendable,
                        @RequestParam(name = "photo") String photo,
                        @RequestParam(name = "video") String video,
-                       @RequestParam(name = "categorie") Categorie categorie,
+                       @RequestParam(name = "categorie") String categorie,
+                       Authentication auth,
                        Model model) {
+    	
+    	Optional<Categorie> foundC = categorieRepository.findById(Long.parseLong(categorie));
+    	Categorie c = foundC.get();
+    	
         Article article = new Article();
         article.setNom(nom);
         article.setDescription(description);
@@ -64,11 +86,17 @@ public class ArticleController {
         article.setIsVendable(isVendable);
         article.setPhoto(photo);
         article.setVideo(video);
-        article.setCategorie(categorie);
+        article.setCategorie(c);
 
         saveAndFlush(article);
 
-        return "article";
+        try {
+            model.addAttribute("user", (User) auth.getPrincipal());
+        } catch (NullPointerException e) {
+            model.addAttribute("user", null);
+        }
+        
+        return "accueil";
     }
 
     public void saveAndFlush(Article article) {

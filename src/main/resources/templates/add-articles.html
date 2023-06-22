@@ -44,9 +44,8 @@
                     <label class="control-label">Prix</label>
                     <input
                             class="form-control"
-                            id="Prix"
-                            name="Prix"
-                            placeholder="Prix"
+                            id="prix"
+                            name="prix"
                             type="Number"
                     />
                 </div>
@@ -59,7 +58,6 @@
                             class="form-control"
                             id="remise"
                             name="remise"
-                            placeholder="Remise"
                             type="Number"
                     />
                 </div>
@@ -79,13 +77,12 @@
                         <label class="input-group-text" for="categorie">Categorie</label>
                     </div>
                     <select class="custom-select" id="categorie" name="categorie">
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
+                        <option value="1">Categorie1</option>
                     </select>
                 </div>
 
-                <input name="isVendable" type="checkbox" value="true"/>
+                <input id="vendable" name="isVendable" type="checkbox" value="true"/>
+                <label class="control-label" for="vendable">Vendable ?</label>
                 
                 <div class="form-group mb-3">
                     <label class="control-label">Photo</label>

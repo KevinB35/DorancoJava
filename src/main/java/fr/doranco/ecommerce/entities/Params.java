@@ -9,7 +9,7 @@ import lombok.Getter;
 public class Params {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
