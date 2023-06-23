@@ -28,18 +28,17 @@
         <thead>
         <tr>
             <th></th>
-            <th></th>
             <th>Nom</th>
             <th>Description</th>
             <th>Prix</th>
             <th>Categorie</th>
             <th>Lien</th>
+            <th>Panier</th>
             <th th:if="${role == 'ROLE_ADMIN' || role == 'ROLE_MAGASINIER'}"></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="article : ${articles}">
-            <td style="width:50px"><input aria-label="Delete" name="id" type="checkbox" value="${article.id}"></td>
             <td style="width:50px"><img style="width:50px" th:src="@{(${article.photo})}"/></td>
             <td th:text="${article.nom}"></td>
             <td th:text="${article.description}"></td>
@@ -47,6 +46,16 @@
             <td th:text="${article.categorie.nom}"></td>
             <td>
                 <a class="btn btn-primary" role="button" target="_blank" th:href="@{/article/{id}(id=${article.id})}">Voir</a>
+            </td>
+            <td>
+                <form action="/panier/add" method="post">
+                    <input name="idArticle" th:value="${article.id}" type="hidden"/>
+                    <input name="idUtilisateur" th:value="${user.username}" type="hidden">
+                    <input name="quantite" type="hidden" value="1"/>
+                    <button class="btn btn-primary" type="submit">
+                        Ajouter au panier
+                    </button>
+                </form>
             </td>
             <td th:if="${role == 'ROLE_ADMIN' || role == 'ROLE_MAGASINIER'}">
                 <form action="/article/delete" method="post">

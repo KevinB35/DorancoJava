@@ -1,13 +1,6 @@
 package fr.doranco.ecommerce.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,16 +10,22 @@ import lombok.Setter;
 @Setter
 public class ArticlePanier {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@OneToOne
-	private Article article;
+    @ManyToOne
+    private Article article;
 
-	@Column()
-	private Integer quantite;
+    @Column()
+    private Integer quantite;
 
-	@ManyToOne
-	private Utilisateur utilisateur;
+    @ManyToOne
+    private Utilisateur utilisateur;
+
+    public ArticlePanier(Article article, Integer quantite, Utilisateur utilisateur) {
+        this.article = article;
+        this.quantite = quantite;
+        this.utilisateur = utilisateur;
+    }
 }

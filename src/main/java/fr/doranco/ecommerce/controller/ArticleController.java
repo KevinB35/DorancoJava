@@ -89,7 +89,7 @@ public class ArticleController {
         article.setPrix(prix);
         article.setRemise(remise);
         article.setStock(stock);
-        article.setIsVendable(isVendable);
+        article.setVendable(isVendable);
         article.setPhoto(photo);
         article.setVideo(video);
         article.setCategorie(c);
