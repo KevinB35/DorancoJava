@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" layout:decorate="layouts/default"
+<html lang="fr" layout:decorate="layouts/default"
       th:with="user=${user}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
@@ -7,36 +7,87 @@
 
 <div layout:fragment="content">
 
-    <div id=photos/videos-article>
-        <img alt="photo-article" th:src="${article.photo}"/>
-        <video th:src="${article.video}" title="video-article"/>
-    </div>
+    <div class="container text-center">
 
-    <div>
-        <h5 id=nom-article th:text="${article.nom}"></h5>
-        <p id=description-article th:text="${article.description}"></p>
-    </div>
+        <form action="/article/delete" method="post">
+            <input name="id" th:value="${id}" type="hidden"/>
+            <button class="btn btn-danger mt-5 mb-3" th:if="${role == 'ROLE_ADMIN' || role == 'ROLE_MAGASINIER'}"
+                    type="submit">
+                Supprimer l'article
+            </button>
+        </form>
 
-    <div>
-        <p id=prix-article th:text="${article.prix}"></p>
-        <p id=remise-article th:text="${article.remise}"></p>
-    </div>
-
-    <input formmethod=post placeholder="Ajouter au panier" type=button>
-
-    <div>
-        <p id=stock-article th:text="${article.stock}"></p>
-        <p id=isVendable-article th:text="${article.isVendable}"></p>
-    </div>
-
-    <div>
-        <div>
-            <p id=commentaire-article th:text="${commentaire?.utilisateur}"></p>
-            <p id=commentaire-article th:text="${commentaire?.note}"></p>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <img alt="photo-article" style="width:100%" th:src="${article.photo}"/>
+            </div>
+            <div class="col-4"></div>
         </div>
-        <p id=commentaire-article th:text="${commentaire?.texte}"></p>
+        <div class="row" th:unless="${article.video == ''}">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <video style="width:100%" th:src="${article.video}" title="video-article"></video>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Nom</strong>
+            </div>
+            <div class="col">
+                <span th:text="${article.nom}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Description</strong>
+            </div>
+            <div class="col">
+                <span th:text="${article.description}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Prix</strong>
+            </div>
+            <div class="col">
+                <span th:text="${article.prix}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Remise</strong>
+            </div>
+            <div class="col">
+                <span th:text="${article.remise}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Prix apres remise</strong>
+            </div>
+            <div class="col">
+                <span th:text="${article.prix * (1 - (article.remise / 100))}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Stock</strong>
+            </div>
+            <div class="col">
+                <span th:text="${article.stock}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <strong>Vendable ?</strong>
+            </div>
+            <div class="col">
+                <span th:text="${article.isVendable ? 'Oui' : 'Non'}"></span>
+            </div>
+        </div>
     </div>
-
 </div>
 
 </body>

@@ -17,16 +17,8 @@
     <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav ml-auto">
             <li th:switch="${user}">
-                <a class="nav-link" th:case=null>Non connecte</a>
+                <a class="nav-link" th:case=null th:href="@{/login-utilisateur}">Connexion</a>
                 <a class="nav-link" th:case="*" th:text="${user?.username}"></a>
-            </li>
-            <li th:switch="${user}">
-                <a class="nav-link" th:case=null></a>
-                <a class="nav-link" th:case="*" th:text="${user?.authorities[0]}"></a>
-            </li>
-            <li th:switch="${user}">
-                <a class="nav-link" th:case=null></a>
-                <a class="nav-link" th:case="*" th:href="@{/deconnexion}">Deconnexion</a>
             </li>
             <li th:switch="${user}">
                 <a class="nav-link" th:case=null></a>
@@ -35,6 +27,14 @@
             <li th:switch="${user}">
                 <a class="nav-link" th:case=null></a>
                 <a class="nav-link" th:case="*" th:href="@{/#}">Commandes</a>
+            </li>
+            <li th:switch="${user}">
+                <a class="nav-link" th:case=null></a>
+                <a class="nav-link" th:case="*" th:href="@{/article/catalogue}">Catalogue</a>
+            </li>
+            <li th:switch="${user}">
+                <a class="nav-link" th:case=null></a>
+                <a class="nav-link" th:case="*" th:href="@{/deconnexion}">Deconnexion</a>
             </li>
         </ul>
     </div>

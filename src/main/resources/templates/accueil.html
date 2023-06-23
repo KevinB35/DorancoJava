@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" layout:decorate="layouts/default"
+<html lang="fr" layout:decorate="layouts/default"
       th:with="user=${user}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
@@ -10,11 +10,14 @@
 
 <div class="container" layout:fragment="content">
     <div class="row mt-5">
-        <div class="col-6 text-center">
+        <div class="col-6 text-center" th:if="${user} == null">
             <a class="btn btn-primary" role="button" th:href="@{/login-utilisateur}">Se connecter</a>
         </div>
-        <div class="col-6 text-center">
+        <div class="col-6 text-center" th:if="${user} == null">
             <a class="btn btn-primary" role="button" th:href="@{/add-utilisateur}">Créer un compte</a>
+        </div>
+        <div class="text-center" style="width:100%" th:unless="${user} == null">
+            Connecte en tant que <span th:text="${user?.username}"/>
         </div>
     </div>
 </div>

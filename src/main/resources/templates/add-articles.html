@@ -11,101 +11,51 @@
 <div class="container" layout:fragment="content">
     
         <div class="add/article-body">
-            <form
-                    class="form-horizontal"
-                    method="post"
-                    role="form"
-                    th:action="@{/article/ajouter}"
-            >
-            
+            <form method="post" th:action="@{/article/ajouter}">
              	<div class="form-group mb-3">
-                    <label class="control-label">Nom</label>
-                    <input
-                            class="form-control"
-                            id="nom"
-                            name="nom"
-                            placeholder="Nom"
-                            type="text"
-                    />
+                    <label class="control-label" for="nom">Nom</label>
+                    <input class="form-control" id="nom" name="nom" placeholder="Nom" type="text"/>
                 </div>
-                
                 <div class="form-group mb-3">
-                    <label class="control-label">Description</label>
-                    <input
-                            class="form-control"
-                            id="description"
-                            name="description"
-                            placeholder="description"
-                            type="text"
-                    />
+                    <label class="control-label" for="description">Description</label>
+                    <input class="form-control" id="description" name="description" placeholder="Description" type="text"/>
                 </div>
-
                 <div class="form-group mb-3">
-                    <label class="control-label">Prix</label>
-                    <input
-                            class="form-control"
-                            id="prix"
-                            name="prix"
-                            type="Number"
-                    />
+                    <label class="control-label" for="prix">Prix</label>
+                    <input class="form-control" id="prix" name="prix" type="number" step="0.01"/>
                 </div>
-
-               
-
                 <div class="form-group mb-3">
-                    <label class="control-label">Remise</label>
-                    <input
-                            class="form-control"
-                            id="remise"
-                            name="remise"
-                            type="Number"
-                    />
+                    <label class="control-label" for="remise">Remise (%)</label>
+                    <input class="form-control" id="remise" name="remise" type="number"/>
                 </div>
-
                 <div class="form-group mb-3">
-                    <label class="control-label">Stock</label>
-                    <input
-                            class="form-control"
-                            id="stock"
-                            name="stock"
-                            type="Number"
-                    />
+                    <label class="control-label" for="stock">Stock</label>
+                    <input class="form-control" id="stock" name="stock" type="number"/>
                 </div>
-
                 <div class="form-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="categorie">Categorie</label>
+                    <div class="input-group">
+                        <label class="control-label" for="categorie">Categorie</label>
                     </div>
                     <select class="custom-select" id="categorie" name="categorie">
-                        <option value="1">Categorie1</option>
+                        <option value="1">Categorie 1</option>
+                        <option value="2">Categorie 2</option>
+                        <option value="3">Categorie 3</option>
+                        <option value="4">Categorie 4</option>
+                        <option value="5">Categorie 5</option>
                     </select>
                 </div>
 
-                <input id="vendable" name="isVendable" type="checkbox" value="true"/>
                 <label class="control-label" for="vendable">Vendable ?</label>
+                <input id="vendable" name="isVendable" type="checkbox" checked/>
                 
                 <div class="form-group mb-3">
-                    <label class="control-label">Photo</label>
-                    <input
-                            class="form-control"
-                            id="photo"
-                            name="photo"
-                            placeholder="Photo"
-                            type="url"
-                    />
+                    <label class="control-label" for="photo">Photo</label>
+                    <input class="form-control" id="photo" name="photo" placeholder="Photo" type="url"/>
                 </div>
-                
                 <div class="form-group mb-3">
-                    <label class="control-label">Video</label>
-                    <input
-                            class="form-control"
-                            id="video"
-                            name="video"
-                            placeholder="Video"
-                            type="url"
-                    />
+                    <label class="control-label" for="video">Video</label>
+                    <input class="form-control" id="video" name="video" placeholder="Video" type="url"/>
                 </div>
-                
                 <div class="form-group mb-3">
                     <button class="btn btn-primary" type="submit">Ajouter l'article</button>
                 </div>

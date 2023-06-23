@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" layout:decorate="layouts/default"
+<html lang="fr" layout:decorate="layouts/default"
       th:with="user=${user}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
@@ -10,11 +10,19 @@
 
 <div class="container text-center" layout:fragment="content">
     <div th:if="${role == 'ROLE_ADMIN' || role == 'ROLE_MAGASINIER'}">
-        <button class="btn btn-primary mt-5 mb-2"
-                type="button">
-            Ajouter un article
-        </button>
+        <a class="btn btn-primary mt-5" role="button" th:href="@{/article/ajouter}">Ajouter un article</a>
     </div>
+
+    <form action="/article/catalogue" method="get">
+        <select class="mt-2 mb-2" name="categorie" onchange="this.form.submit()">
+            <option value="0">---</option>
+            <option th:selected="${categorie == '1' ? true : false}" value="1">Categorie 1</option>
+            <option th:selected="${categorie == '2' ? true : false}" value="2">Categorie 2</option>
+            <option th:selected="${categorie == '3' ? true : false}" value="3">Categorie 3</option>
+            <option th:selected="${categorie == '4' ? true : false}" value="4">Categorie 4</option>
+            <option th:selected="${categorie == '5' ? true : false}" value="5">Categorie 5</option>
+        </select>
+    </form>
 
     <table class="table">
         <thead>
@@ -25,23 +33,32 @@
             <th>Description</th>
             <th>Prix</th>
             <th>Categorie</th>
+            <th>Lien</th>
+            <th th:if="${role == 'ROLE_ADMIN' || role == 'ROLE_MAGASINIER'}"></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="article : ${articles}">
-            <td style="width:50px"><input aria-label="Delete" type="checkbox"></td>
+            <td style="width:50px"><input aria-label="Delete" name="id" type="checkbox" value="${article.id}"></td>
             <td style="width:50px"><img style="width:50px" th:src="@{(${article.photo})}"/></td>
             <td th:text="${article.nom}"></td>
             <td th:text="${article.description}"></td>
             <td th:text="${article.prix}"></td>
-            <td th:text="${article.categorie}"></td>
+            <td th:text="${article.categorie.nom}"></td>
+            <td>
+                <a class="btn btn-primary" role="button" target="_blank" th:href="@{/article/{id}(id=${article.id})}">Voir</a>
+            </td>
+            <td th:if="${role == 'ROLE_ADMIN' || role == 'ROLE_MAGASINIER'}">
+                <form action="/article/delete" method="post">
+                    <input name="id" th:value="${article.id}" type="hidden"/>
+                    <button class="btn btn-danger" type="submit">
+                        Supprimer
+                    </button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
-    <button class="btn btn-primary"
-            th:if="${role == 'ROLE_ADMIN' || role == 'ROLE_MAGASINIER'}">
-        Supprimer les articles selectionnes
-    </button>
 </div>
 
 </body>
